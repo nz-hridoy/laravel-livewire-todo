@@ -28,7 +28,14 @@
 
                 <div class="card">
                     <div class="card-header pb-1">
-                        <h5><strong>NzCoding - ToDo App</strong></h5>
+                        <h5 class="float-start"><strong>NzCoding - ToDo App</strong></h5>
+                        @if (session()->has('danger_message'))
+                            <small class="float-end text-danger">{{ session('danger_message') }}</small>
+                        @else
+                            @if (session()->has('success_message'))
+                                <small class="float-end text-success">{{ session('success_message') }}</small>
+                            @endif
+                        @endif
                     </div>
                     <div class="card-body">
                         <form wire:submit.prevent='store'>
@@ -41,9 +48,8 @@
                         </form>
 
                         <hr>
-
-                        <ul class="list-group list-scroll" style="user-select: none; height: 67vh; overflow-y: scroll;">
-                            @if ($tasks->count() > 0)
+                        @if ($tasks->count() > 0)
+                            <ul class="list-group list-scroll" style="user-select: none; height: 67vh; overflow-y: scroll;">
                                 @foreach ($tasks as $task)
                                     <li class="list-group-item d-flex justify-content-between align-items-center mb-2" style="border: 1px solid #DEE2E6;">
                                         @if ($task->status == 1)
@@ -58,10 +64,13 @@
                                         </span>
                                     </li>
                                 @endforeach
-                            @else
+                            </ul>
+                        @else
+                            <div class="text-center" style="user-select: none; height: 67vh;">
+                                <small class="text-danger">No task found!</small>
+                            </div>
+                        @endif
 
-                            @endif
-                        </ul>
                     </div>
 
                     <div class="card-footer text-center pt-1">
