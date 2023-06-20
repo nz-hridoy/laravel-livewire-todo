@@ -29,6 +29,13 @@ class IndexComponent extends Component
         $this->task_content = '';
     }
 
+    public function markAsComplete($task_id)
+    {
+        $task = Task::find($task_id);
+        $task->status = $task->status == 1 ? 0 : 1;
+        $task->save();
+    }
+
     public function render()
     {
         $tasks = Task::orderBy('id', 'DESC')->get();

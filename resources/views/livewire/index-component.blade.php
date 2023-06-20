@@ -46,11 +46,16 @@
                             @if ($tasks->count() > 0)
                                 @foreach ($tasks as $task)
                                     <li class="list-group-item d-flex justify-content-between align-items-center mb-2" style="border: 1px solid #DEE2E6;">
-                                        <span style="display: flex;">
-                                            <input type="checkbox" id="item_{{ $task->id }}" style="margin-right: 10px;">
-                                            <label for="item_{{ $task->id }}" class="">{{ $task->content }}</label>
+                                        @if ($task->status == 1)
+                                            <del>{{ $task->content }}</del>
+                                        @else
+                                            {{ $task->content }}
+                                        @endif
+
+                                        <span>
+                                            <a href="#" class="text-{{ $task->status == 0 ? 'secondary':'success' }}" wire:click.prevent='markAsComplete({{ $task->id }})'><i class="fa fa-check"></i></a>
+                                            <a href="#" class="text-danger"><i class="fa fa-times"></i></a>
                                         </span>
-                                        <a href="#" class="text-danger"><i class="fa fa-times"></i></a>
                                     </li>
                                 @endforeach
                             @else
