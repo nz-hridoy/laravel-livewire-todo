@@ -15,6 +15,12 @@
         {
             background-color: #cecece;
         }
+
+        .form-control:focus{
+            outline: 0;
+            box-shadow: none;
+            border: 1px solid #DEE2E6;
+        }
     </style>
     <div class="container-sm">
         <div class="row justify-content-center mt-5">
@@ -25,10 +31,10 @@
                         <h5><strong>NzCoding - ToDo App</strong></h5>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form wire:submit.prevent='store'>
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Add new task">
-                                <button class="btn btn-dark input-group-append">
+                                <input type="text" class="form-control @error('task_content') border-danger @enderror" placeholder="Add new task" wire:model='task_content'>
+                                <button type="submit" class="btn btn-dark input-group-append">
                                     <i class="fa fa-plus-circle"></i>
                                 </button>
                             </div>
