@@ -31,6 +31,8 @@ class IndexComponent extends Component
 
     public function render()
     {
-        return view('livewire.index-component')->layout('livewire.layouts.base');
+        $tasks = Task::orderBy('id', 'DESC')->get();
+
+        return view('livewire.index-component', ['tasks'=>$tasks])->layout('livewire.layouts.base');
     }
 }
