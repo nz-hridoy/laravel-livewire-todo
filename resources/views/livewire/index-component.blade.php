@@ -54,7 +54,7 @@
 
                                         <span>
                                             <a href="#" class="text-{{ $task->status == 0 ? 'secondary':'success' }}" wire:click.prevent='markAsComplete({{ $task->id }})'><i class="fa fa-check"></i></a>
-                                            <a href="#" class="text-danger"><i class="fa fa-times"></i></a>
+                                            <a href="#" class="text-danger" wire:click.prevent='delete({{ $task->id }})'><i class="fa fa-times"></i></a>
                                         </span>
                                     </li>
                                 @endforeach

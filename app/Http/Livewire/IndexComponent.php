@@ -26,6 +26,7 @@ class IndexComponent extends Component
         $task->content = $this->task_content;
         $task->save();
 
+        $this->dispatchBrowserEvent('success_message', ['message' => 'New task added']);
         $this->task_content = '';
     }
 
@@ -34,6 +35,16 @@ class IndexComponent extends Component
         $task = Task::find($task_id);
         $task->status = $task->status == 1 ? 0 : 1;
         $task->save();
+
+        $this->dispatchBrowserEvent('success_message', ['message' => 'Task updated']);
+    }
+
+    public function delete($task_id)
+    {
+        $task = Task::find($task_id);
+        $task->delete();
+
+        $this->dispatchBrowserEvent('danger_message', ['message' => 'task deleted']);
     }
 
     public function render()
