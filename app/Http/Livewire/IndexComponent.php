@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Task;
 use Livewire\Component;
 
 class IndexComponent extends Component
@@ -20,6 +21,12 @@ class IndexComponent extends Component
         $this->validate([
             'task_content' => 'required'
         ]);
+
+        $task = new Task();
+        $task->content = $this->task_content;
+        $task->save();
+
+        $this->task_content = '';
     }
 
     public function render()
